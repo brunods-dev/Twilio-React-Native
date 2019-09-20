@@ -146,6 +146,7 @@ export default class Example extends Component {
   componentDidMount(){
     requestCameraPermission()
     requestAudioPermission()
+    console.log("123456")
     ToastExample.show('Toast awesome example', ToastExample.LONG);
   }
 
@@ -156,7 +157,7 @@ export default class Example extends Component {
     participants: new Map(),
     videoTracks: new Map(),
     roomName: 'Room2',
-    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzM3NWQ2MDMxZGRmZTM3YmUxMjUzYzQ0ZGNmOGJjNGMyLTE1NjkwMDczMjQiLCJpc3MiOiJTSzM3NWQ2MDMxZGRmZTM3YmUxMjUzYzQ0ZGNmOGJjNGMyIiwic3ViIjoiQUMxZjQ1YjEwZjA2MzdjYjJkNWUwNTg3YjJhOGQzOTlmOSIsImV4cCI6MTU2OTAxMDkyNCwiZ3JhbnRzIjp7ImlkZW50aXR5IjoiQnJ1bm8yIiwidmlkZW8iOnsicm9vbSI6IlJvb20yIn19fQ.zyNiYryAfpOoZYKXZFjz__4v-Odc6V5b7hhh84qODi4'
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTSzM3NWQ2MDMxZGRmZTM3YmUxMjUzYzQ0ZGNmOGJjNGMyLTE1NjkwMTI3MjQiLCJpc3MiOiJTSzM3NWQ2MDMxZGRmZTM3YmUxMjUzYzQ0ZGNmOGJjNGMyIiwic3ViIjoiQUMxZjQ1YjEwZjA2MzdjYjJkNWUwNTg3YjJhOGQzOTlmOSIsImV4cCI6MTU2OTAxNjMyNCwiZ3JhbnRzIjp7ImlkZW50aXR5IjoiQnJ1bm8zIiwidmlkZW8iOnsicm9vbSI6IlJvb20yIn19fQ.0vkvH-libI2SwROp2W-T-Fw1cMCUDNp1figtsIQe-l8'
   }
 
   _onConnectButtonPress = () => {
@@ -194,7 +195,8 @@ export default class Example extends Component {
 
     this.setState({
       videoTracks: new Map([
-        ...this.state.videoTracks,
+        // ...this.state.videoTracks,
+        Array.from(this.state.videoTracks),
         [track.trackSid, { participantSid: participant.sid, videoTrackSid: track.trackSid }]
       ]),
     });
@@ -246,7 +248,6 @@ export default class Example extends Component {
               <View style={styles.remoteGrid}>
                 {
                   Array.from(this.state.videoTracks, ([trackSid, trackIdentifier]) => {
-                    ToastExample.show('Toast awesome example', ToastExample.LONG)
                     return (
                       <TwilioVideoParticipantView
                         style={styles.remoteVideo}
